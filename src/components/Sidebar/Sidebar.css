@@ -1,6 +1,7 @@
 .Sidebar{
     min-height: 100vh;
-    display: inline-flex;
+    display: flex;
+    box-sizing: border-box;
     flex-direction: column;
     justify-content: space-between;
     background-color: #f0f4f9;
@@ -27,7 +28,7 @@
 
 .Sidebar .new-chat{
     margin-top: 50px;
-    display: inline-flex;
+    display: flex;
     align-items: center;
     gap: 10px;
     padding: 10px 15px;
@@ -36,44 +37,100 @@
     font-size: 14px;
     color: grey;
     cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.Sidebar .new-chat img {
+    min-width: 20px; /* Ensure icon doesn't shrink */
 }
 
 .Sidebar .recent{
     display: flex;
     flex-direction: column;
+    margin-top: 30px; /* Spacing after new-chat button */
+    flex-grow: 1; /* Allow recent section to grow and take available space */
+    overflow-y: auto; /* Enable scrolling for recent entries if too many */
+    padding-right: 5px;
 }
 
 .Sidebar .recent-title{
-    margin-top: 30px;
     margin-bottom: 20px;
+    padding-left: 10px; /* Align title with recent entries */
+    font-size: 16px;
+    color: #585858;
+    white-space: nowrap; /* Prevent wrapping */
 }
 
 .Sidebar .recent-entry{
     display: flex;
-    align-items: start;
+    align-items: center; /* Vertically center icon and text */
     gap: 10px;
-    padding: 10px;
-    padding-right: 40px;
-    border-radius: 50px;
+    padding: 10px; /* Uniform padding */
+    border-radius: 50px; /* Rounded corners for the entire entry */
     color: #282828;
     cursor: pointer;
+    white-space: nowrap; /* Prevent text from wrapping */
+    overflow: hidden; /* Hide overflow if text is too long */
+    text-overflow: ellipsis; /* Add ellipsis for truncated text */
 }
 
-.Sidebar .recent-entry :hover{
+.Sidebar .recent-entry:hover{
     background-color: #e2e6eb;
 }
 
 .Sidebar .bottom{
     display: flex;
     flex-direction: column;
+    margin-top: 20px; /* Space from the recent section */
+    padding-top: 10px;
+    border-top: 1px solid #e0e0e0;
 }
 
 .Sidebar .bottom-item{
-    padding-right: 10px;
+    display: flex; /* Use flex to align icon and text */
+    align-items: center;
+    gap: 10px;
+    padding: 10px; /* Consistent padding */
+    border-radius: 50px; /* Rounded corners for the entire item */
+    color: #282828;
     cursor: pointer;
+    white-space: nowrap; /* Prevent wrapping */
+    overflow: hidden; /* Hide overflow if text is too long */
+    text-overflow: ellipsis;
 }
 
-.Sidebar .bottom :hover{
+.Sidebar .bottom:hover{
     background-color: #e2e6eb;
+}
+
+.Sidebar .bottom-item img {
+    min-width: 20px; /* Ensure icon doesn't shrink */
+}
+
+.Sidebar .no-recent-chats {
+    font-size: 14px;
+    color: #888;
+    padding: 10px;
+    text-align: center;
+}
+@media (max-width: 600px) {
+    .Sidebar {
+        width: 60px; /* Even smaller collapsed width on small screens */
+        padding: 20px 10px;
+    }
+    .Sidebar.extended {
+        width: 200px; /* Smaller extended width */
+    }
+    .Sidebar .new-chat,
+    .Sidebar .recent-entry,
+    .Sidebar .bottom-item {
+        padding: 8px 10px;
+        font-size: 12px;
+    }
+    .Sidebar img {
+        width: 18px;
+    }
 }
 

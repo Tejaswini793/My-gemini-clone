@@ -1,6 +1,6 @@
 import { generateGeminiResponse } from './gemini.js';
 
-const prompt = "Write a short motivational quote.";
+const prompt = "write an idiom.";
 
 generateGeminiResponse(prompt)
   .then((response) => {

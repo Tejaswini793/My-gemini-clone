@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Sidebar.css';
 import { assets } from '../../assets/assets';
 
-const Sidebar = () => { 
+const Sidebar = ({ onNewChat,chatHistory,onLoadPastPrompt,onHelpClick,onActivityClick,onSettingsClick }) => { 
     const [extended, setExtended] = useState(false);
 
     return (
@@ -13,29 +13,34 @@ const Sidebar = () => {
                     <img src={assets.plus_icon} alt="" />
                     {extended ? <p> New Chat</p> : null}
                 </div>
-                {extended
-                    ?<div className='recent'>
-                        <p className="recent-title">Recent </p>
-                        <div className="recent-entry">
-                            <img src={assets.message_icon} alt="" />
-                            <p>What is react..</p>
-                        </div>
-                    </div>
-                    : null
-                }
-                
-            </div>
-            <div className="bottom">
-                <div className="bottom-item recent-entry">
-                    <img src={assets.question_icon} alt="" />
+                {extended 
+                    ?(
+          <div className="recent">
+            <p className="title">Recent</p>
+            {chatHistory.length > 0 ? (
+              chatHistory.map((entry, index) => (
+                <div key={index} onClick={() => onLoadPastPrompt(entry)} className="recent-entry"> {/* <--- Connects to onLoadPastPrompt */}
+                  <img src={assets.message_icon} alt="message icon" />
+                  <p>{entry.length > 15 ? entry.substring(0, 15) + '...' : entry}</p>
+                </div>
+              ))
+            ) : (
+              <p className="no-recent-chats">No recent chats</p>
+            )}
+          </div>
+        ): null}
+        </div>
+        <div className="bottom">
+                <div onClick={onHelpClick} className="bottom-item recent-entry"> 
+                    <img src={assets.question_icon} alt="Help icon" />
                     {extended?<p>Help</p>:null}
                 </div>
-                <div className="bottom-item recent-entry">
-                    <img src={assets.history_icon} alt="" />
+                <div onClick={onActivityClick} className="bottom-item recent-entry"> 
+                    <img src={assets.history_icon} alt="Activity icon" />
                     {extended?<p>Activity</p>:null}
                 </div>
-                <div className="bottom-item recent-entry">
-                    <img src={assets.setting_icon} alt="" />
+                <div onClick={onSettingsClick} className="bottom-item recent-entry">
+                    <img src={assets.setting_icon} alt="Settings icon" />
                     {extended?<p>Settings</p>:null}
                 </div>
             </div>
