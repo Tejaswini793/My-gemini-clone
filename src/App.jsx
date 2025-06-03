@@ -103,6 +103,8 @@ const App = () => {
         console.log("Microphone clicked!");
     };
 
+    const showInitialGreeting = chatHistory.length === 0;
+
     return (
         <>
             <Sidebar

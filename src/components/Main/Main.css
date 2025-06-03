@@ -89,69 +89,97 @@
 
 .chat-display {
     flex-grow: 1;
-    overflow-y: auto;
-    padding-right: 15px;
-    padding-bottom: 20px;
+    overflow-y: auto; /* Enables scrolling for messages */
+    padding: 20px 15px; /* Ample padding around the chat area, including space for scrollbar */
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 15px; /* Spacing between message bubbles */
     max-width: 900px;
-    margin: auto;
-    width: 100%;
-    box-sizing: border-box;
+    margin: 0px auto; /* Center the chat display within main-container */
+    width: 100%; /* Take full width within its parent's max-width */
+    box-sizing: border-box; /* Include padding in the element's total width */
+    scroll-behavior: smooth; /* Smooth scrolling for new messages */
 }
 
 .message {
     display: flex;
-    align-items: flex-start;
-    gap: 15px;
-    padding: 10px 15px;
-    border-radius: 10px;
-    max-width: 70%;
-    word-wrap: break-word;
-    word-break: break-all;
+    align-items: flex-start; /* Align content (e.g., icon and text) to the top of the bubble */
+    padding: 12px 18px;
+    border-radius: 18px; /* Slightly less rounded than before for a cleaner look */
+    max-width: 70%; /* Keep max-width reasonable to avoid very wide bubbles */
+    word-wrap: break-word; /* Essential for breaking long words that might overflow */
+    word-break: break-word; /* More aggressive word breaking */
     box-sizing: border-box;
+    font-size: 3rem; /* Use rem for better responsiveness */
+    line-height: 1.5; /* Good line spacing for readability */
+    color: #333; /* Default text color */
+    position: relative;
 }
 
 .message p {
-    font-size: 16px;
+    margin: 0;
+    font-size: 20px;
     line-height: 1.6;
     color: #333;
 }
 
 .message.user {
-    justify-content: flex-end;
-    align-self: flex-end;
-    background-color: #e0e6f8;
-    color: #2a2a2a;
+    align-self: flex-end; /* Pushes the entire message bubble to the right */
+    background-color: #f0f4f9; /* A standard vibrant blue */
+    color: #ffffff; /* White text for strong contrast */
+    border-bottom-right-radius: 5px; /* Small "tail" effect */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1); /* Subtle shadow for depth */
 }
 
 .message.gemini {
-    justify-content: flex-start;
-    align-self: flex-start;
-    background-color: #f0f4f9;
-    color: #2a2a2a;
+   align-self: flex-start; /* Pushes the entire message bubble to the left */
+    background-color: #f0f4f9; /* A very light, neutral grey */
+    color: #282828; /* Darker text for readability */
+    border-bottom-left-radius: 5px; /* Small "tail" effect */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08); /* Subtle shadow */
+}
+
+.message pre {
+    white-space: pre-wrap; /* Ensures code wraps */
+    word-break: break-all;
+    background-color: rgba(0,0,0,0.05);
+    padding: 10px;
+    border-radius: 5px;
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+    font-size: 0.9em;
+    overflow-x: auto; /* Allows horizontal scrolling for long lines of code */
+}
+
+.message p {
+    margin: 0; /* Remove default paragraph margin for tight packing */
+    padding: 0; /* Remove default paragraph padding */
 }
 
 .loading-indicator {
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 10px 0;
+    gap: 8px;
+    padding: 10px 18px;
     margin-top: 10px;
-    font-size: 16px;
+    font-size: 1rem;
     color: #666;
     align-self: flex-start;
+    background-color: #f0f4f9;
+    border-radius: 18px;
+    border-bottom-left-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    max-width: fit-content;
 }
 
 .dot-pulse {
     position: relative;
-    width: 8px;
-    height: 8px;
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
     background-color: #999;
-    color: #999;
     animation: dot-pulse 1.5s infinite ease-in-out;
+    flex-shrink: 0;
+    margin-top: 2px;
 }
 
 .dot-pulse::before, .dot-pulse::after {
@@ -159,28 +187,27 @@
     position: absolute;
     display: inline-block;
     top: 0;
-    width: 8px;
-    height: 8px;
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
     background-color: #999;
-    color: #999;
     animation: dot-pulse 1.5s infinite ease-in-out;
 }
 
 .dot-pulse::before {
-    left: -12px;
+    left: -10px;
     animation-delay: -0.3s;
 }
 
 .dot-pulse::after {
-    left: 12px;
+    left: 10px;
     animation-delay: 0.3s;
 }
 
 @keyframes dot-pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.2); background-color: #666; }
-    100% { transform: scale(1); }
+    0% { transform: scale(1); opacity: 0.7; }
+    50% { transform: scale(1.2); background-color: #666; opacity: 1; }
+    100% { transform: scale(1); opacity: 0.7; }
 }
 
 .main-bottom {
@@ -222,7 +249,7 @@
     border: none;
     outline: none;
     padding: 8px;
-    font-size: 18px;
+    font-size: 20px;
     color: #333;
 }
 
